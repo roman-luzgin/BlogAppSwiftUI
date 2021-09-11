@@ -8,9 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var store = BlogPostsStore()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        TabView {
+            MainView()
+                .environmentObject(store)
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
+            AllPosts()
+                .environmentObject(store)
+                .tabItem {
+                    Image(systemName: "list.dash")
+                    Text("See all")
+                }
+        }
     }
 }
 
